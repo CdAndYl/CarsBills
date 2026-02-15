@@ -1,0 +1,120 @@
+﻿<Window x:Class="CarsBill.WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:prism="http://prismlibrary.com/"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="CarsBill Management System" 
+        Height="700" Width="1100"
+        WindowStartupLocation="CenterScreen"
+        Style="{StaticResource MaterialDesignWindow}"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{materialDesign:MaterialDesignFont}">
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="0" Background="{DynamicResource PrimaryHueDarkBrush}">
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Top" Margin="0,20,0,20" HorizontalAlignment="Center">
+                    <materialDesign:PackIcon Kind="TruckDelivery" Width="48" Height="48" 
+                                             Foreground="White" HorizontalAlignment="Center"/>
+                    <TextBlock Text="CarsBill" FontSize="18" FontWeight="Bold" 
+                               Foreground="White" Margin="0,10,0,0" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Management System" FontSize="12" 
+                               Foreground="#B0BEC5" Margin="0,4,0,0" HorizontalAlignment="Center"/>
+                </StackPanel>
+
+                <Separator DockPanel.Dock="Top" Background="#455A64" Margin="15,0"/>
+
+                <ListBox x:Name="MenuList" DockPanel.Dock="Top" Margin="0,10,0,0"
+                         SelectionChanged="MenuList_SelectionChanged"
+                         Style="{x:Null}">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="Height" Value="48"/>
+                            <Setter Property="Padding" Value="20,0,0,0"/>
+                            <Setter Property="Foreground" Value="#B0BEC5"/>
+                            <Setter Property="FontSize" Value="14"/>
+                            <Setter Property="Cursor" Value="Hand"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListBoxItem">
+                                        <Border x:Name="Border" Background="Transparent" Padding="{TemplateBinding Padding}">
+                                            <ContentPresenter VerticalAlignment="Center"/>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="Border" Property="Background" Value="#37474F"/>
+                                            </Trigger>
+                                            <Trigger Property="IsSelected" Value="True">
+                                                <Setter TargetName="Border" Property="Background" Value="#455A64"/>
+                                                <Setter Property="Foreground" Value="White"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+
+                    <ListBoxItem Tag="DashboardView" IsSelected="True">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="ViewDashboard" VerticalAlignment="Center" Margin="0,0,12,0"/>
+                            <TextBlock Text="Dashboard" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListBoxItem>
+                    <ListBoxItem Tag="BusinessView">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="FileDocumentEdit" VerticalAlignment="Center" Margin="0,0,12,0"/>
+                            <TextBlock Text="Business" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListBoxItem>
+                    <ListBoxItem Tag="BaseInfoView">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Database" VerticalAlignment="Center" Margin="0,0,12,0"/>
+                            <TextBlock Text="Base Info" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListBoxItem>
+                    <ListBoxItem Tag="ReportView">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="ChartBar" VerticalAlignment="Center" Margin="0,0,12,0"/>
+                            <TextBlock Text="Reports" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListBoxItem>
+                    <ListBoxItem Tag="SettingsView">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Cog" VerticalAlignment="Center" Margin="0,0,12,0"/>
+                            <TextBlock Text="Settings" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ListBoxItem>
+                </ListBox>
+
+                <TextBlock DockPanel.Dock="Bottom" Text="v1.0.0" FontSize="11"
+                           Foreground="#607D8B" HorizontalAlignment="Center" Margin="0,0,0,15"/>
+            </DockPanel>
+        </Border>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0" Background="White" BorderBrush="#E0E0E0" BorderThickness="0,0,0,1">
+                <DockPanel Margin="20,0">
+                    <TextBlock x:Name="PageTitle" Text="Dashboard" FontSize="18" FontWeight="Medium"
+                               VerticalAlignment="Center" DockPanel.Dock="Left"/>
+                </DockPanel>
+            </Border>
+
+            <ContentControl Grid.Row="1" prism:RegionManager.RegionName="ContentRegion" Margin="15"/>
+        </Grid>
+    </Grid>
+</Window>

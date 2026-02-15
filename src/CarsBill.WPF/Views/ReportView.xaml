@@ -1,0 +1,15 @@
+<UserControl x:Class="CarsBill.WPF.Views.ReportView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+    <Grid>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            <materialDesign:PackIcon Kind="ChartBar" Width="64" Height="64" 
+                                     HorizontalAlignment="Center" Foreground="{DynamicResource PrimaryHueMidBrush}"/>
+            <TextBlock Text="Reports" FontSize="24" FontWeight="Bold" Margin="0,15,0,5"
+                       HorizontalAlignment="Center"/>
+            <TextBlock Text="Daily, Monthly Reports, Excel Export (In Development...)" FontSize="14" Foreground="#757575"
+                       HorizontalAlignment="Center"/>
+        </StackPanel>
+    </Grid>
+</UserControl>
