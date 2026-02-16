@@ -57,6 +57,8 @@ public partial class App : PrismApplication
         containerRegistry.Register<AddressInfoViewModel>();
         containerRegistry.Register<MaterialInfoViewModel>();
         containerRegistry.Register<ProjectInfoViewModel>();
+        containerRegistry.Register<BusinessViewModel>();
+        containerRegistry.Register<ReportViewModel>();
 
         // 注册导航页面
         containerRegistry.RegisterForNavigation<DashboardView>();
