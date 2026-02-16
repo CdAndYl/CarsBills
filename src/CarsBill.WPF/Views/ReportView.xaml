@@ -1,4 +1,4 @@
-<UserControl x:Class="CarsBill.WPF.Views.ReportView"
+﻿<UserControl x:Class="CarsBill.WPF.Views.ReportView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -14,13 +14,13 @@
         <!-- Filter Bar -->
         <Border Grid.Row="0" Background="#FAFAFA" Padding="10" CornerRadius="4" Margin="0,0,0,10">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="From:" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                <TextBlock Text="��ʼ����:" VerticalAlignment="Center" Margin="0,0,5,0"/>
                 <DatePicker Width="130" SelectedDate="{Binding FilterStartDate}"
                             Style="{StaticResource MaterialDesignOutlinedDatePicker}"/>
-                <TextBlock Text="To:" VerticalAlignment="Center" Margin="15,0,5,0"/>
+                <TextBlock Text="��������:" VerticalAlignment="Center" Margin="15,0,5,0"/>
                 <DatePicker Width="130" SelectedDate="{Binding FilterEndDate}"
                             Style="{StaticResource MaterialDesignOutlinedDatePicker}"/>
-                <Button Content="Refresh" Margin="15,0,0,0" Command="{Binding LoadCommand}"
+                <Button Content="ˢ��" Margin="15,0,0,0" Command="{Binding LoadCommand}"
                         Style="{StaticResource MaterialDesignOutlinedButton}"/>
             </StackPanel>
         </Border>
@@ -29,25 +29,25 @@
         <UniformGrid Grid.Row="1" Columns="4" Margin="0,0,0,10">
             <Border Background="#E3F2FD" CornerRadius="6" Padding="15" Margin="0,0,8,0">
                 <StackPanel>
-                    <TextBlock Text="Total Records" FontSize="12" Foreground="#757575"/>
+                    <TextBlock Text="�ܼ�¼��" FontSize="12" Foreground="#757575"/>
                     <TextBlock Text="{Binding TotalRecords}" FontSize="24" FontWeight="Bold" Foreground="#1565C0"/>
                 </StackPanel>
             </Border>
             <Border Background="#E8F5E9" CornerRadius="6" Padding="15" Margin="4,0">
                 <StackPanel>
-                    <TextBlock Text="Total Car Count" FontSize="12" Foreground="#757575"/>
+                    <TextBlock Text="�ܳ���" FontSize="12" Foreground="#757575"/>
                     <TextBlock Text="{Binding TotalCarCount}" FontSize="24" FontWeight="Bold" Foreground="#2E7D32"/>
                 </StackPanel>
             </Border>
             <Border Background="#FFF3E0" CornerRadius="6" Padding="15" Margin="4,0">
                 <StackPanel>
-                    <TextBlock Text="Total Amount" FontSize="12" Foreground="#757575"/>
+                    <TextBlock Text="�ܽ��" FontSize="12" Foreground="#757575"/>
                     <TextBlock Text="{Binding TotalAmount, StringFormat='{}{0:N2}'}" FontSize="24" FontWeight="Bold" Foreground="#E65100"/>
                 </StackPanel>
             </Border>
             <Border Background="#F3E5F5" CornerRadius="6" Padding="15" Margin="8,0,0,0">
                 <StackPanel>
-                    <TextBlock Text="Vehicles" FontSize="12" Foreground="#757575"/>
+                    <TextBlock Text="������" FontSize="12" Foreground="#757575"/>
                     <TextBlock Text="{Binding VehicleCount}" FontSize="24" FontWeight="Bold" Foreground="#6A1B9A"/>
                 </StackPanel>
             </Border>
@@ -63,7 +63,7 @@
             <Border Grid.Column="0" Background="White" CornerRadius="6" Padding="10" Margin="0,0,5,0"
                     BorderBrush="#E0E0E0" BorderThickness="1">
                 <DockPanel>
-                    <TextBlock DockPanel.Dock="Top" Text="Daily Trend" FontSize="13" FontWeight="Medium" Margin="0,0,0,5"/>
+                    <TextBlock DockPanel.Dock="Top" Text="������" FontSize="13" FontWeight="Medium" Margin="0,0,0,5"/>
                     <lvc:CartesianChart Series="{Binding DailySeries}" XAxes="{Binding DailyXAxes}"/>
                 </DockPanel>
             </Border>
@@ -71,7 +71,7 @@
             <Border Grid.Column="1" Background="White" CornerRadius="6" Padding="10" Margin="5,0,0,0"
                     BorderBrush="#E0E0E0" BorderThickness="1">
                 <DockPanel>
-                    <TextBlock DockPanel.Dock="Top" Text="Vehicle Distribution" FontSize="13" FontWeight="Medium" Margin="0,0,0,5"/>
+                    <TextBlock DockPanel.Dock="Top" Text="�����ֲ�" FontSize="13" FontWeight="Medium" Margin="0,0,0,5"/>
                     <lvc:PieChart Series="{Binding VehicleSeries}"/>
                 </DockPanel>
             </Border>
@@ -81,16 +81,16 @@
         <Border Grid.Row="3" Margin="0,10,0,0" Background="White" CornerRadius="6" Padding="10"
                 BorderBrush="#E0E0E0" BorderThickness="1">
             <DockPanel>
-                <TextBlock DockPanel.Dock="Top" Text="Vehicle Summary" FontSize="13" FontWeight="Medium" Margin="0,0,0,5"/>
+                <TextBlock DockPanel.Dock="Top" Text="��������" FontSize="13" FontWeight="Medium" Margin="0,0,0,5"/>
                 <DataGrid ItemsSource="{Binding VehicleSummaries}"
                           AutoGenerateColumns="False" IsReadOnly="True"
                           CanUserAddRows="False" CanUserDeleteRows="False"
                           Style="{StaticResource MaterialDesignDataGrid}">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="License Plate" Binding="{Binding LicensePlate}" Width="150"/>
-                        <DataGridTextColumn Header="Trips" Binding="{Binding TripCount}" Width="80"/>
-                        <DataGridTextColumn Header="Car Count" Binding="{Binding CarCount}" Width="100"/>
-                        <DataGridTextColumn Header="Total Amount" Binding="{Binding TotalAmount, StringFormat='{}{0:N2}'}" Width="*"/>
+                        <DataGridTextColumn Header="���ƺ�" Binding="{Binding LicensePlate}" Width="150"/>
+                        <DataGridTextColumn Header="����" Binding="{Binding TripCount}" Width="80"/>
+                        <DataGridTextColumn Header="����" Binding="{Binding CarCount}" Width="100"/>
+                        <DataGridTextColumn Header="�ܽ��" Binding="{Binding TotalAmount, StringFormat='{}{0:N2}'}" Width="*"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </DockPanel>

@@ -1,19 +1,19 @@
-<UserControl x:Class="CarsBill.WPF.Views.BaseInfoView"
+﻿<UserControl x:Class="CarsBill.WPF.Views.BaseInfoView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:baseInfo="clr-namespace:CarsBill.WPF.Views.BaseInfo">
     <TabControl Style="{StaticResource MaterialDesignNavigationRailTabControl}">
-        <TabItem Header="Vehicle">
+        <TabItem Header="����">
             <baseInfo:CarInfoView x:Name="CarTab" Margin="10"/>
         </TabItem>
-        <TabItem Header="Address">
+        <TabItem Header="�ص�">
             <baseInfo:NameCodeInfoView x:Name="AddressTab" Margin="10"/>
         </TabItem>
-        <TabItem Header="Material">
+        <TabItem Header="����">
             <baseInfo:NameCodeInfoView x:Name="MaterialTab" Margin="10"/>
         </TabItem>
-        <TabItem Header="Project">
+        <TabItem Header="��Ŀ">
             <baseInfo:NameCodeInfoView x:Name="ProjectTab" Margin="10"/>
         </TabItem>
     </TabControl>

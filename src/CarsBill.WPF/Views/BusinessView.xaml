@@ -1,4 +1,4 @@
-<UserControl x:Class="CarsBill.WPF.Views.BusinessView"
+﻿<UserControl x:Class="CarsBill.WPF.Views.BusinessView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
@@ -14,23 +14,23 @@
         <Border Grid.Row="0" Background="#FAFAFA" Padding="10" CornerRadius="4" Margin="0,0,0,10">
             <WrapPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,0,15,5">
-                    <TextBlock Text="From:" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                    <TextBlock Text="��ʼ����:" VerticalAlignment="Center" Margin="0,0,5,0"/>
                     <DatePicker Width="130" SelectedDate="{Binding FilterStartDate}"
                                 Style="{StaticResource MaterialDesignOutlinedDatePicker}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,0,15,5">
-                    <TextBlock Text="To:" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                    <TextBlock Text="��������:" VerticalAlignment="Center" Margin="0,0,5,0"/>
                     <DatePicker Width="130" SelectedDate="{Binding FilterEndDate}"
                                 Style="{StaticResource MaterialDesignOutlinedDatePicker}"/>
                 </StackPanel>
                 <TextBox Width="160" Margin="0,0,10,5"
-                         materialDesign:HintAssist.Hint="Search keyword"
+                         materialDesign:HintAssist.Hint="�����ؼ���"
                          Text="{Binding FilterKeyword, UpdateSourceTrigger=PropertyChanged}"
                          Style="{StaticResource MaterialDesignOutlinedTextBox}"
                          materialDesign:TextFieldAssist.HasClearButton="True"/>
-                <Button Content="Add" Margin="5,0,5,5" Command="{Binding AddCommand}"
+                <Button Content="����" Margin="5,0,5,5" Command="{Binding AddCommand}"
                         Style="{StaticResource MaterialDesignRaisedButton}"/>
-                <Button Content="Refresh" Margin="5,0,0,5" Command="{Binding LoadCommand}"
+                <Button Content="ˢ��" Margin="5,0,0,5" Command="{Binding LoadCommand}"
                         Style="{StaticResource MaterialDesignOutlinedButton}"/>
             </WrapPanel>
         </Border>
@@ -43,25 +43,25 @@
                   SelectionMode="Single"
                   Style="{StaticResource MaterialDesignDataGrid}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Date" Binding="{Binding BusinessDate, StringFormat='{}{0:MM-dd}'}" Width="65"/>
-                <DataGridTextColumn Header="Plate" Binding="{Binding LicensePlate}" Width="100"/>
-                <DataGridTextColumn Header="From" Binding="{Binding StartAddr}" Width="90"/>
-                <DataGridTextColumn Header="To" Binding="{Binding EndAddr}" Width="90"/>
-                <DataGridTextColumn Header="Material" Binding="{Binding MaterialName}" Width="80"/>
-                <DataGridTextColumn Header="Project" Binding="{Binding ProjectName}" Width="80"/>
-                <DataGridTextColumn Header="Count" Binding="{Binding CarCount}" Width="55"/>
-                <DataGridTextColumn Header="Price" Binding="{Binding Price, StringFormat='{}{0:F2}'}" Width="70"/>
-                <DataGridTextColumn Header="Total" Binding="{Binding TotalAmount, StringFormat='{}{0:F2}'}" Width="80"/>
-                <DataGridTextColumn Header="Memo" Binding="{Binding Memo}" Width="*"/>
+                <DataGridTextColumn Header="����" Binding="{Binding BusinessDate, StringFormat='{}{0:MM-dd}'}" Width="65"/>
+                <DataGridTextColumn Header="���ƺ�" Binding="{Binding LicensePlate}" Width="100"/>
+                <DataGridTextColumn Header="���" Binding="{Binding StartAddr}" Width="90"/>
+                <DataGridTextColumn Header="�յ�" Binding="{Binding EndAddr}" Width="90"/>
+                <DataGridTextColumn Header="����" Binding="{Binding MaterialName}" Width="80"/>
+                <DataGridTextColumn Header="��Ŀ" Binding="{Binding ProjectName}" Width="80"/>
+                <DataGridTextColumn Header="����" Binding="{Binding CarCount}" Width="55"/>
+                <DataGridTextColumn Header="����" Binding="{Binding Price, StringFormat='{}{0:F2}'}" Width="70"/>
+                <DataGridTextColumn Header="�ܶ�" Binding="{Binding TotalAmount, StringFormat='{}{0:F2}'}" Width="80"/>
+                <DataGridTextColumn Header="��ע" Binding="{Binding Memo}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
 
         <!-- Summary Bar -->
         <Border Grid.Row="2" Background="#E3F2FD" Padding="10,6" CornerRadius="4" Margin="0,8,0,0">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Records: " FontWeight="Medium"/>
+                <TextBlock Text="��¼��: " FontWeight="Medium"/>
                 <TextBlock Text="{Binding TotalCount}" Margin="0,0,30,0" FontWeight="Bold" Foreground="#1565C0"/>
-                <TextBlock Text="Total Amount: " FontWeight="Medium"/>
+                <TextBlock Text="�ܽ��: " FontWeight="Medium"/>
                 <TextBlock Text="{Binding TotalAmount, StringFormat='{}{0:N2}'}" FontWeight="Bold" Foreground="#1565C0"/>
             </StackPanel>
         </Border>
@@ -70,43 +70,43 @@
         <Border Grid.Row="3" Background="#F5F5F5" CornerRadius="4" Padding="15" Margin="0,10,0,0"
                 Visibility="{Binding IsEditing, Converter={StaticResource BooleanToVisibilityConverter}}">
             <StackPanel>
-                <TextBlock Text="Edit Business Record" FontSize="14" FontWeight="Medium" Margin="0,0,0,10"/>
+                <TextBlock Text="�༭ҵ���¼" FontSize="14" FontWeight="Medium" Margin="0,0,0,10"/>
                 <WrapPanel>
                     <StackPanel Margin="0,0,15,8">
-                        <TextBlock Text="Date" FontSize="11" Foreground="#757575"/>
+                        <TextBlock Text="����" FontSize="11" Foreground="#757575"/>
                         <DatePicker Width="130" SelectedDate="{Binding EditBusinessDate}"
                                     Style="{StaticResource MaterialDesignOutlinedDatePicker}"/>
                     </StackPanel>
                     <StackPanel Margin="0,0,15,8">
-                        <TextBlock Text="Vehicle *" FontSize="11" Foreground="#757575"/>
+                        <TextBlock Text="���� *" FontSize="11" Foreground="#757575"/>
                         <ComboBox Width="140" ItemsSource="{Binding Cars}"
                                   SelectedItem="{Binding EditSelectedCar}"
                                   DisplayMemberPath="LicensePlate"
                                   Style="{StaticResource MaterialDesignOutlinedComboBox}"/>
                     </StackPanel>
                     <StackPanel Margin="0,0,15,8">
-                        <TextBlock Text="From Address" FontSize="11" Foreground="#757575"/>
+                        <TextBlock Text="����ַ" FontSize="11" Foreground="#757575"/>
                         <ComboBox Width="130" ItemsSource="{Binding Addresses}"
                                   SelectedItem="{Binding EditSelectedStartAddr}"
                                   DisplayMemberPath="SpaceName"
                                   Style="{StaticResource MaterialDesignOutlinedComboBox}"/>
                     </StackPanel>
                     <StackPanel Margin="0,0,15,8">
-                        <TextBlock Text="To Address" FontSize="11" Foreground="#757575"/>
+                        <TextBlock Text="�յ��ַ" FontSize="11" Foreground="#757575"/>
                         <ComboBox Width="130" ItemsSource="{Binding Addresses}"
                                   SelectedItem="{Binding EditSelectedEndAddr}"
                                   DisplayMemberPath="SpaceName"
                                   Style="{StaticResource MaterialDesignOutlinedComboBox}"/>
                     </StackPanel>
                     <StackPanel Margin="0,0,15,8">
-                        <TextBlock Text="Material" FontSize="11" Foreground="#757575"/>
+                        <TextBlock Text="����" FontSize="11" Foreground="#757575"/>
                         <ComboBox Width="120" ItemsSource="{Binding Materials}"
                                   SelectedItem="{Binding EditSelectedMaterial}"
                                   DisplayMemberPath="MaterialName"
                                   Style="{StaticResource MaterialDesignOutlinedComboBox}"/>
                     </StackPanel>
                     <StackPanel Margin="0,0,15,8">
-                        <TextBlock Text="Project" FontSize="11" Foreground="#757575"/>
+                        <TextBlock Text="��Ŀ" FontSize="11" Foreground="#757575"/>
                         <ComboBox Width="120" ItemsSource="{Binding Projects}"
                                   SelectedItem="{Binding EditSelectedProject}"
                                   DisplayMemberPath="ProjectName"
@@ -115,34 +115,34 @@
                 </WrapPanel>
                 <WrapPanel Margin="0,0,0,5">
                     <StackPanel Margin="0,0,15,8">
-                        <TextBlock Text="Count" FontSize="11" Foreground="#757575"/>
+                        <TextBlock Text="����" FontSize="11" Foreground="#757575"/>
                         <TextBox Width="80" Text="{Binding EditCarCount, UpdateSourceTrigger=PropertyChanged}"
                                  Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
                     </StackPanel>
                     <StackPanel Margin="0,0,15,8">
-                        <TextBlock Text="Price" FontSize="11" Foreground="#757575"/>
+                        <TextBlock Text="����" FontSize="11" Foreground="#757575"/>
                         <TextBox Width="100" Text="{Binding EditPrice, UpdateSourceTrigger=PropertyChanged}"
                                  Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
                     </StackPanel>
-                    <Button Content="Auto Price" Margin="0,14,15,8" Command="{Binding AutoPriceCommand}"
+                    <Button Content="�Զ�ƥ��" Margin="0,14,15,8" Command="{Binding AutoPriceCommand}"
                             Style="{StaticResource MaterialDesignFlatButton}" Foreground="#1565C0"/>
                     <StackPanel Margin="0,0,15,8">
-                        <TextBlock Text="Total" FontSize="11" Foreground="#757575"/>
+                        <TextBlock Text="�ܶ�" FontSize="11" Foreground="#757575"/>
                         <TextBlock Text="{Binding EditTotal, StringFormat='{}{0:N2}'}" FontSize="18" FontWeight="Bold"
                                    Foreground="#1565C0" VerticalAlignment="Center" Margin="0,8,0,0"/>
                     </StackPanel>
                     <StackPanel Margin="0,0,15,8">
-                        <TextBlock Text="Memo" FontSize="11" Foreground="#757575"/>
+                        <TextBlock Text="��ע" FontSize="11" Foreground="#757575"/>
                         <TextBox Width="150" Text="{Binding EditMemo, UpdateSourceTrigger=PropertyChanged}"
                                  Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
                     </StackPanel>
                 </WrapPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Button Content="Save" Margin="0,0,10,0" Command="{Binding SaveCommand}"
+                    <Button Content="����" Margin="0,0,10,0" Command="{Binding SaveCommand}"
                             Style="{StaticResource MaterialDesignRaisedButton}"/>
-                    <Button Content="Cancel" Command="{Binding CancelCommand}"
+                    <Button Content="ȡ��" Command="{Binding CancelCommand}"
                             Style="{StaticResource MaterialDesignOutlinedButton}"/>
-                    <Button Content="Delete" Margin="20,0,0,0" Command="{Binding DeleteCommand}"
+                    <Button Content="ɾ��" Margin="20,0,0,0" Command="{Binding DeleteCommand}"
                             Foreground="Red" BorderBrush="Red"
                             Style="{StaticResource MaterialDesignOutlinedButton}"
                             Visibility="{Binding IsNew, Converter={StaticResource InverseBoolToVisConverter}}"/>
