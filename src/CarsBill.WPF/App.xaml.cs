@@ -1,6 +1,9 @@
 ﻿using AutoMapper;
 using CarsBill.WPF.Common;
 using CarsBill.WPF.Data;
+using CarsBill.WPF.Models;
+using CarsBill.WPF.Services;
+using CarsBill.WPF.ViewModels;
 using CarsBill.WPF.Views;
 using Microsoft.EntityFrameworkCore;
 using Prism.DryIoc;
@@ -40,6 +43,20 @@ public partial class App : PrismApplication
             cfg.AddProfile<AutoMapperProfile>();
         });
         containerRegistry.RegisterInstance(mapperConfig.CreateMapper());
+
+        // 注册通用CRUD服务
+        containerRegistry.Register<IBaseService<CarInfo>, BaseService<CarInfo>>();
+        containerRegistry.Register<IBaseService<AddressInfo>, BaseService<AddressInfo>>();
+        containerRegistry.Register<IBaseService<MaterialInfo>, BaseService<MaterialInfo>>();
+        containerRegistry.Register<IBaseService<ProjectInfo>, BaseService<ProjectInfo>>();
+        containerRegistry.Register<IBaseService<BusinessRecord>, BaseService<BusinessRecord>>();
+        containerRegistry.Register<IBaseService<PriceRule>, BaseService<PriceRule>>();
+
+        // 注册 ViewModels
+        containerRegistry.Register<CarInfoViewModel>();
+        containerRegistry.Register<AddressInfoViewModel>();
+        containerRegistry.Register<MaterialInfoViewModel>();
+        containerRegistry.Register<ProjectInfoViewModel>();
 
         // 注册导航页面
         containerRegistry.RegisterForNavigation<DashboardView>();
