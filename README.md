@@ -1,4 +1,6 @@
-# CarsBill - Fleet Billing Management System
+﻿# CarsBill - Fleet Billing Management System
+
+[English](README.md) | [简体中文](README.zh-CN.md)
 
 A WPF desktop application for fleet transportation billing management.
 
@@ -33,7 +35,8 @@ NewCarBills/
 |   `-- MainWindow.xaml.cs
 |-- .gitignore
 |-- CarsBill.sln
-`-- README.md
+|-- README.md
+`-- README.zh-CN.md
 ```
 
 ## Getting Started
