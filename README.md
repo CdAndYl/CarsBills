@@ -17,18 +17,23 @@ A WPF desktop application for fleet transportation billing management.
 
 ```
 NewCarBills/
-©À©¤©¤ docs/                        # Documentation
-©À©¤©¤ src/CarsBill.WPF/           # WPF Application
-©¦   ©À©¤©¤ Models/                  # Entity Models
-©¦   ©À©¤©¤ Views/                   # Views (XAML)
-©¦   ©À©¤©¤ ViewModels/              # View Models
-©¦   ©À©¤©¤ Data/                    # EF Core DbContext
-©¦   ©À©¤©¤ Services/                # Business Services
-©¦   ©À©¤©¤ Common/                  # Common Utilities
-©¦   ©¸©¤©¤ Resources/               # Resources
-©À©¤©¤ .gitignore
-©À©¤©¤ CarsBill.sln
-©¸©¤©¤ README.md
+|-- docs/                         # Documentation
+|-- src/CarsBill.WPF/            # WPF Application
+|   |-- Common/                   # Common utilities/converters
+|   |-- Data/                     # EF Core DbContext
+|   |-- Extensions/               # DI/extension registration
+|   |-- Models/                   # Entity models
+|   |-- Resources/                # Themes/resources
+|   |-- Services/                 # Business services
+|   |-- ViewModels/               # View models (MVVM)
+|   |-- Views/                    # Views (XAML)
+|   |-- App.xaml
+|   |-- App.xaml.cs
+|   |-- MainWindow.xaml
+|   `-- MainWindow.xaml.cs
+|-- .gitignore
+|-- CarsBill.sln
+`-- README.md
 ```
 
 ## Getting Started
