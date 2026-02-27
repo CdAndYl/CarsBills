@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl x:Class="CarsBill.WPF.Views.BatchPriceView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             Background="Transparent">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Style="{StaticResource AppCardStyle}" Margin="0,0,0,12">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <materialDesign:PackIcon Kind="TableSync" Width="20" Height="20" Foreground="#1D4ED8" Margin="0,0,8,0"/>
+                    <TextBlock Text="批量单价设置" Style="{StaticResource SectionTitleTextStyle}" VerticalAlignment="Center"/>
+                </StackPanel>
+
+                <WrapPanel Margin="0,12,0,0">
+                    <StackPanel Width="180" Margin="0,0,12,8">
+                        <TextBlock Text="开始日期" Style="{StaticResource FieldCaptionTextStyle}"/>
+                        <DatePicker SelectedDate="{Binding FilterStartDate}" Style="{StaticResource MaterialDesignOutlinedDatePicker}"/>
+                    </StackPanel>
+                    <StackPanel Width="180" Margin="0,0,12,8">
+                        <TextBlock Text="结束日期" Style="{StaticResource FieldCaptionTextStyle}"/>
+                        <DatePicker SelectedDate="{Binding FilterEndDate}" Style="{StaticResource MaterialDesignOutlinedDatePicker}"/>
+                    </StackPanel>
+                    <StackPanel Width="170" Margin="0,0,12,8">
+                        <TextBlock Text="起始地点" Style="{StaticResource FieldCaptionTextStyle}"/>
+                        <ComboBox ItemsSource="{Binding StartAddressOptions}"
+                                  SelectedItem="{Binding FilterStartAddress}"
+                                  DisplayMemberPath="Name"
+                                  Style="{StaticResource MaterialDesignOutlinedComboBox}"/>
+                    </StackPanel>
+                    <StackPanel Width="170" Margin="0,0,12,8">
+                        <TextBlock Text="终止地点" Style="{StaticResource FieldCaptionTextStyle}"/>
+                        <ComboBox ItemsSource="{Binding EndAddressOptions}"
+                                  SelectedItem="{Binding FilterEndAddress}"
+                                  DisplayMemberPath="Name"
+                                  Style="{StaticResource MaterialDesignOutlinedComboBox}"/>
+                    </StackPanel>
+                    <StackPanel Width="170" Margin="0,0,12,8">
+                        <TextBlock Text="物料" Style="{StaticResource FieldCaptionTextStyle}"/>
+                        <ComboBox ItemsSource="{Binding MaterialOptions}"
+                                  SelectedItem="{Binding FilterMaterial}"
+                                  DisplayMemberPath="Name"
+                                  Style="{StaticResource MaterialDesignOutlinedComboBox}"/>
+                    </StackPanel>
+                    <StackPanel Width="170" Margin="0,0,12,8">
+                        <TextBlock Text="项目" Style="{StaticResource FieldCaptionTextStyle}"/>
+                        <ComboBox ItemsSource="{Binding ProjectOptions}"
+                                  SelectedItem="{Binding FilterProject}"
+                                  DisplayMemberPath="Name"
+                                  Style="{StaticResource MaterialDesignOutlinedComboBox}"/>
+                    </StackPanel>
+                    <StackPanel Width="180" Margin="0,0,12,8">
+                        <TextBlock Text="车牌号（可多行/逗号）" Style="{StaticResource FieldCaptionTextStyle}"/>
+                        <TextBox Text="{Binding FilterPlate, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                    </StackPanel>
+                    <StackPanel Width="180" Margin="0,0,12,8">
+                        <TextBlock Text="备注关键字" Style="{StaticResource FieldCaptionTextStyle}"/>
+                        <TextBox Text="{Binding FilterMemoKeyword, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                    </StackPanel>
+                </WrapPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
+                    <CheckBox Content="仅显示空单价记录" IsChecked="{Binding FilterOnlyEmptyPrice}" VerticalAlignment="Center" Margin="0,0,12,0"/>
+                    <Button Content="查询" Command="{Binding QueryCommand}" Style="{StaticResource AppPrimaryButtonStyle}" Margin="0,0,8,0"/>
+                    <Button Content="刷新规则" Command="{Binding RefreshRulesCommand}" Style="{StaticResource AppSecondaryButtonStyle}"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Style="{StaticResource AppCardStyle}" Margin="0,0,8,0">
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Top" Text="待更新记录" Style="{StaticResource SectionTitleTextStyle}" Margin="0,0,0,8"/>
+                    <DataGrid ItemsSource="{Binding PreviewItems}"
+                              AutoGenerateColumns="False"
+                              IsReadOnly="True"
+                              CanUserAddRows="False"
+                              CanUserDeleteRows="False"
+                              Style="{StaticResource AppDataGridStyle}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="日期" Binding="{Binding BusinessDate, StringFormat='{}{0:yyyy-MM-dd}'}" Width="95"/>
+                            <DataGridTextColumn Header="车牌号" Binding="{Binding LicensePlate}" Width="105"/>
+                            <DataGridTextColumn Header="起点" Binding="{Binding StartAddr}" Width="95"/>
+                            <DataGridTextColumn Header="终点" Binding="{Binding EndAddr}" Width="95"/>
+                            <DataGridTextColumn Header="物料" Binding="{Binding MaterialName}" Width="90"/>
+                            <DataGridTextColumn Header="项目" Binding="{Binding ProjectName}" Width="90"/>
+                            <DataGridTextColumn Header="车数" Binding="{Binding CarCount}" Width="60"/>
+                            <DataGridTextColumn Header="单价" Binding="{Binding Price, StringFormat='{}{0:F2}'}" Width="80"/>
+                            <DataGridTextColumn Header="总额" Binding="{Binding TotalAmount, StringFormat='{}{0:F2}'}" Width="90"/>
+                            <DataGridTextColumn Header="备注" Binding="{Binding Memo}" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Column="1" Style="{StaticResource AppCardStyle}" Margin="8,0,0,0">
+                <StackPanel>
+                    <TextBlock Text="可用规则（双击可快速应用）" Style="{StaticResource SectionTitleTextStyle}"/>
+                    <ListBox ItemsSource="{Binding ActiveRules}"
+                             SelectedItem="{Binding SelectedRule}"
+                             Height="280"
+                             Margin="0,10,0,10">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border Style="{StaticResource AppSubtleCardStyle}" Margin="0,4,0,0" Padding="8">
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding Remark}" FontWeight="SemiBold"/>
+                                        <TextBlock FontSize="12" Foreground="{DynamicResource SubtleTextBrush}" Text="{Binding StartAddr, StringFormat='起点: {0}'}"/>
+                                        <TextBlock FontSize="12" Foreground="{DynamicResource SubtleTextBrush}" Text="{Binding EndAddr, StringFormat='终点: {0}'}"/>
+                                        <TextBlock FontSize="12" Foreground="{DynamicResource SubtleTextBrush}" Text="{Binding Price, StringFormat='单价: {0:F2}'}"/>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                    <TextBlock Text="自定义单价" Style="{StaticResource FieldCaptionTextStyle}"/>
+                    <TextBox Text="{Binding CustomPrice, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource MaterialDesignOutlinedTextBox}" Margin="0,0,0,8"/>
+
+                    <Button Content="应用自定义单价" Command="{Binding ApplyCustomPriceCommand}" Style="{StaticResource AppSecondaryButtonStyle}" Margin="0,0,0,8"/>
+                    <Button Content="应用所选规则单价" Command="{Binding ApplySelectedRuleCommand}" Style="{StaticResource AppPrimaryButtonStyle}" Margin="0,0,0,8"/>
+
+                    <Border Style="{StaticResource AppSubtleCardStyle}" Margin="0,4,0,0" Background="#EEF6FF" BorderBrush="#D8EAFE">
+                        <TextBlock Text="{Binding SummaryText}" TextWrapping="Wrap" Foreground="#1E3A8A"/>
+                    </Border>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -84,6 +84,7 @@ public class BusinessViewModel : BindableBase
                 EditSelectedProject = Projects.FirstOrDefault(p => p.ProjectId == value.ProjectId);
                 EditCarCount = value.CarCount;
                 EditPrice = value.Price;
+                EditIsPaid = value.IsPaid == 1;
                 EditMemo = value.Memo ?? "";
                 IsEditing = true;
                 IsNew = false;
@@ -150,6 +151,9 @@ public class BusinessViewModel : BindableBase
 
     private decimal _editTotal;
     public decimal EditTotal { get => _editTotal; set => SetProperty(ref _editTotal, value); }
+
+    private bool _editIsPaid;
+    public bool EditIsPaid { get => _editIsPaid; set => SetProperty(ref _editIsPaid, value); }
 
     private string _editMemo = "";
     public string EditMemo { get => _editMemo; set => SetProperty(ref _editMemo, value); }
@@ -224,6 +228,7 @@ public class BusinessViewModel : BindableBase
         EditCarCount = 1;
         EditPrice = 0;
         EditTotal = 0;
+        EditIsPaid = false;
         EditMemo = "";
         IsEditing = true;
         IsNew = true;
@@ -254,6 +259,7 @@ public class BusinessViewModel : BindableBase
                 CarCount = EditCarCount,
                 Price = EditPrice,
                 TotalAmount = EditCarCount * EditPrice,
+                IsPaid = EditIsPaid ? 1 : 0,
                 Memo = EditMemo.Trim()
             };
             await _bizService.AddAsync(entity);
@@ -274,6 +280,7 @@ public class BusinessViewModel : BindableBase
             SelectedItem.CarCount = EditCarCount;
             SelectedItem.Price = EditPrice;
             SelectedItem.TotalAmount = EditCarCount * EditPrice;
+            SelectedItem.IsPaid = EditIsPaid ? 1 : 0;
             SelectedItem.Memo = EditMemo.Trim();
             SelectedItem.UpdatedAt = DateTime.Now;
             await _bizService.UpdateAsync(SelectedItem);

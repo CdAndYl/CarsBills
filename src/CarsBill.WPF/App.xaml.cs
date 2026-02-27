@@ -109,12 +109,16 @@ public partial class App : PrismApplication
         containerRegistry.Register<ProjectInfoViewModel>();
         containerRegistry.Register<BusinessViewModel>();
         containerRegistry.Register<ReportViewModel>();
+        containerRegistry.Register<PriceRuleViewModel>();
+        containerRegistry.Register<BatchPriceViewModel>();
 
         // 注册导航页面
         containerRegistry.RegisterForNavigation<DashboardView>();
         containerRegistry.RegisterForNavigation<BusinessView>();
         containerRegistry.RegisterForNavigation<BaseInfoView>();
         containerRegistry.RegisterForNavigation<ReportView>();
+        containerRegistry.RegisterForNavigation<PriceRuleView>();
+        containerRegistry.RegisterForNavigation<BatchPriceView>();
         containerRegistry.RegisterForNavigation<SettingsView>();
     }
 

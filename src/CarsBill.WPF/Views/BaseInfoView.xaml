@@ -5,16 +5,16 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:baseInfo="clr-namespace:CarsBill.WPF.Views.BaseInfo">
     <TabControl Style="{StaticResource MaterialDesignNavigationRailTabControl}">
-        <TabItem Header="����">
+        <TabItem Header="车辆">
             <baseInfo:CarInfoView x:Name="CarTab" Margin="10"/>
         </TabItem>
-        <TabItem Header="�ص�">
+        <TabItem Header="地点">
             <baseInfo:NameCodeInfoView x:Name="AddressTab" Margin="10"/>
         </TabItem>
-        <TabItem Header="����">
+        <TabItem Header="物料">
             <baseInfo:NameCodeInfoView x:Name="MaterialTab" Margin="10"/>
         </TabItem>
-        <TabItem Header="��Ŀ">
+        <TabItem Header="项目">
             <baseInfo:NameCodeInfoView x:Name="ProjectTab" Margin="10"/>
         </TabItem>
     </TabControl>

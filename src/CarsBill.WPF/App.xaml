@@ -7,10 +7,118 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <materialDesign:BundledTheme BaseTheme="Light" PrimaryColor="Blue" SecondaryColor="Teal" />
+                <materialDesign:BundledTheme BaseTheme="Light" PrimaryColor="Indigo" SecondaryColor="Teal" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesign2.Defaults.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            <converters:InverseBoolToVisConverter x:Key="InverseBoolToVisConverter"/>
+
+            <!-- Color System -->
+            <SolidColorBrush x:Key="AppBackgroundBrush" Color="#EEF3FA" />
+            <SolidColorBrush x:Key="CardSurfaceBrush" Color="#FFFFFF" />
+            <SolidColorBrush x:Key="CardBorderBrush" Color="#DCE6F2" />
+            <SolidColorBrush x:Key="SubtleBorderBrush" Color="#E8EEF7" />
+            <SolidColorBrush x:Key="SubtleTextBrush" Color="#5B6B82" />
+            <SolidColorBrush x:Key="TitleTextBrush" Color="#1B2A40" />
+            <SolidColorBrush x:Key="SuccessBrush" Color="#22C55E" />
+            <SolidColorBrush x:Key="WarningBrush" Color="#F59E0B" />
+            <SolidColorBrush x:Key="DangerBrush" Color="#EF4444" />
+            <SolidColorBrush x:Key="WindowTopBarBrush" Color="#1E3A8A" />
+            <SolidColorBrush x:Key="WindowTopBarBorderBrush" Color="#27438F" />
+            <SolidColorBrush x:Key="WindowBrandTextBrush" Color="#EFF6FF" />
+            <SolidColorBrush x:Key="WindowTitlePrimaryBrush" Color="#FFFFFF" />
+            <SolidColorBrush x:Key="WindowTitleSecondaryBrush" Color="#DBEAFE" />
+            <SolidColorBrush x:Key="WindowLeftPanelBrush" Color="#F4F7FD" />
+            <SolidColorBrush x:Key="WindowLeftPanelBorderBrush" Color="#D7E1EE" />
+            <SolidColorBrush x:Key="WindowMenuHeaderBrush" Color="#6B7D96" />
+            <SolidColorBrush x:Key="WindowMenuTextBrush" Color="#31445F" />
+            <SolidColorBrush x:Key="WindowMenuHoverBrush" Color="#E5EEFA" />
+            <SolidColorBrush x:Key="WindowMenuSelectedBrush" Color="#D6E6FF" />
+            <SolidColorBrush x:Key="WindowAccentBrush" Color="#2563EB" />
+            <SolidColorBrush x:Key="WindowVersionTextBrush" Color="#55708F" />
+            <SolidColorBrush x:Key="WindowVersionSubTextBrush" Color="#7390B0" />
+            <SolidColorBrush x:Key="WindowSeparatorBrush" Color="#D6E2F1" />
+            <SolidColorBrush x:Key="TitleButtonForegroundBrush" Color="#E2E8F0" />
+            <SolidColorBrush x:Key="TitleButtonHoverBrush" Color="#3859A8" />
+            <SolidColorBrush x:Key="TitleButtonPressedBrush" Color="#2C4B95" />
+
+            <!-- Shared Surface -->
+            <Style x:Key="AppCardStyle" TargetType="Border">
+                <Setter Property="Background" Value="{DynamicResource CardSurfaceBrush}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource CardBorderBrush}" />
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="CornerRadius" Value="8" />
+                <Setter Property="Padding" Value="14" />
+                <Setter Property="SnapsToDevicePixels" Value="True" />
+            </Style>
+
+            <Style x:Key="AppSubtleCardStyle" TargetType="Border">
+                <Setter Property="Background" Value="#F8FBFF" />
+                <Setter Property="BorderBrush" Value="{DynamicResource SubtleBorderBrush}" />
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="CornerRadius" Value="8" />
+                <Setter Property="Padding" Value="10" />
+            </Style>
+
+            <Style x:Key="AppChipStyle" TargetType="Border">
+                <Setter Property="Background" Value="#E9F1FE" />
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="CornerRadius" Value="8" />
+                <Setter Property="Padding" Value="10,4" />
+            </Style>
+
+            <Style x:Key="AppFrameSurfaceStyle" TargetType="Border">
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="CornerRadius" Value="0" />
+                <Setter Property="Padding" Value="0" />
+            </Style>
+
+            <!-- Typography -->
+            <Style x:Key="PageTitleTextStyle" TargetType="TextBlock">
+                <Setter Property="FontSize" Value="22" />
+                <Setter Property="FontWeight" Value="SemiBold" />
+                <Setter Property="Foreground" Value="{DynamicResource TitleTextBrush}" />
+            </Style>
+            <Style x:Key="SectionTitleTextStyle" TargetType="TextBlock">
+                <Setter Property="FontSize" Value="15" />
+                <Setter Property="FontWeight" Value="SemiBold" />
+                <Setter Property="Foreground" Value="{DynamicResource TitleTextBrush}" />
+            </Style>
+            <Style x:Key="FieldCaptionTextStyle" TargetType="TextBlock">
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="Foreground" Value="{DynamicResource SubtleTextBrush}" />
+                <Setter Property="Margin" Value="0,0,0,4" />
+            </Style>
+
+            <!-- Actions -->
+            <Style x:Key="AppPrimaryButtonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
+                <Setter Property="MinWidth" Value="92" />
+                <Setter Property="Height" Value="36" />
+                <Setter Property="Padding" Value="16,6" />
+            </Style>
+            <Style x:Key="AppSecondaryButtonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignOutlinedButton}">
+                <Setter Property="MinWidth" Value="92" />
+                <Setter Property="Height" Value="36" />
+                <Setter Property="Padding" Value="14,6" />
+            </Style>
+            <Style x:Key="AppFlatButtonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
+                <Setter Property="MinWidth" Value="92" />
+                <Setter Property="Height" Value="36" />
+                <Setter Property="Padding" Value="12,6" />
+            </Style>
+
+            <!-- Data Grid -->
+            <Style x:Key="AppDataGridStyle" TargetType="DataGrid" BasedOn="{StaticResource MaterialDesignDataGrid}">
+                <Setter Property="RowHeight" Value="38" />
+                <Setter Property="GridLinesVisibility" Value="Horizontal" />
+                <Setter Property="HorizontalGridLinesBrush" Value="#E2EAF5" />
+                <Setter Property="AlternatingRowBackground" Value="#F7FAFF" />
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="SelectionMode" Value="Single" />
+                <Setter Property="SelectionUnit" Value="FullRow" />
+            </Style>
+
+            <converters:InverseBoolToVisConverter x:Key="InverseBoolToVisConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </prism:PrismApplication>

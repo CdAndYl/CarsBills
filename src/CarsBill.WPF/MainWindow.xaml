@@ -7,115 +7,241 @@
         xmlns:prism="http://prismlibrary.com/"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="车辆运输计费管理系统" 
-        Height="700" Width="1100"
+        Title="车辆运输计费管理系统"
+        Height="820"
+        Width="1320"
+        MinHeight="720"
+        MinWidth="1160"
         WindowStartupLocation="CenterScreen"
-        Style="{StaticResource MaterialDesignWindow}"
-        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-        Background="{DynamicResource MaterialDesignPaper}"
-        FontFamily="{materialDesign:MaterialDesignFont}">
-    
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="220"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+        WindowStyle="None"
+        AllowsTransparency="False"
+        ResizeMode="CanResize"
+        Background="{DynamicResource AppBackgroundBrush}"
+        FontFamily="Microsoft YaHei"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}">
 
-        <Border Grid.Column="0" Background="{DynamicResource PrimaryHueDarkBrush}">
-            <DockPanel>
-                <StackPanel DockPanel.Dock="Top" Margin="0,20,0,20" HorizontalAlignment="Center">
-                    <materialDesign:PackIcon Kind="TruckDelivery" Width="48" Height="48" 
-                                             Foreground="White" HorizontalAlignment="Center"/>
-                    <TextBlock Text="车辆计费" FontSize="18" FontWeight="Bold" 
-                               Foreground="White" Margin="0,10,0,0" HorizontalAlignment="Center"/>
-                    <TextBlock Text="运输管理系统" FontSize="12" 
-                               Foreground="#B0BEC5" Margin="0,4,0,0" HorizontalAlignment="Center"/>
+    <Window.Resources>
+        <Style x:Key="TitleBarButtonStyle" TargetType="Button">
+            <Setter Property="Width" Value="46" />
+            <Setter Property="Height" Value="54" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Foreground" Value="{DynamicResource TitleButtonForegroundBrush}" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="ButtonBg" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ButtonBg" Property="Background" Value="{DynamicResource TitleButtonHoverBrush}" />
+                                <Setter Property="Foreground" Value="White" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="ButtonBg" Property="Background" Value="{DynamicResource TitleButtonPressedBrush}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="54" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Top Navigation Bar -->
+        <Border Grid.Row="0"
+                Background="{DynamicResource WindowTopBarBrush}"
+                BorderBrush="{DynamicResource WindowTopBarBorderBrush}"
+                BorderThickness="0,0,0,1"
+                MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="250" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="12,0,0,0">
+                    <Border Width="26" Height="26" CornerRadius="4" Background="#FFFFFF26">
+                        <materialDesign:PackIcon Kind="TruckDelivery" Width="16" Height="16" Foreground="#A7F3D0" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                    <TextBlock Text="CarsBill"
+                               Margin="10,0,0,0"
+                               FontSize="15"
+                               FontWeight="SemiBold"
+                               Foreground="{DynamicResource WindowBrandTextBrush}"
+                               VerticalAlignment="Center" />
                 </StackPanel>
 
-                <Separator DockPanel.Dock="Top" Background="#455A64" Margin="15,0"/>
+                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="18,0,0,0">
+                    <TextBlock x:Name="PageTitle"
+                               Text="仪表盘"
+                               FontSize="20"
+                               FontWeight="SemiBold"
+                               Foreground="{DynamicResource WindowTitlePrimaryBrush}"
+                               VerticalAlignment="Center" />
+                    <TextBlock Text="   " VerticalAlignment="Center" />
+                    <TextBlock Text="车辆运输计费管理系统"
+                               FontSize="12"
+                               Foreground="{DynamicResource WindowTitleSecondaryBrush}"
+                               VerticalAlignment="Center" />
+                </StackPanel>
 
-                <ListBox x:Name="MenuList" DockPanel.Dock="Top" Margin="0,10,0,0"
-                         SelectionChanged="MenuList_SelectionChanged"
-                         Style="{x:Null}">
-                    <ListBox.ItemContainerStyle>
-                        <Style TargetType="ListBoxItem">
-                            <Setter Property="Height" Value="48"/>
-                            <Setter Property="Padding" Value="20,0,0,0"/>
-                            <Setter Property="Foreground" Value="#B0BEC5"/>
-                            <Setter Property="FontSize" Value="14"/>
-                            <Setter Property="Cursor" Value="Hand"/>
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="ListBoxItem">
-                                        <Border x:Name="Border" Background="Transparent" Padding="{TemplateBinding Padding}">
-                                            <ContentPresenter VerticalAlignment="Center"/>
-                                        </Border>
-                                        <ControlTemplate.Triggers>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter TargetName="Border" Property="Background" Value="#37474F"/>
-                                            </Trigger>
-                                            <Trigger Property="IsSelected" Value="True">
-                                                <Setter TargetName="Border" Property="Background" Value="#455A64"/>
-                                                <Setter Property="Foreground" Value="White"/>
-                                            </Trigger>
-                                        </ControlTemplate.Triggers>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </ListBox.ItemContainerStyle>
-
-                    <ListBoxItem Tag="DashboardView" IsSelected="True">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="ViewDashboard" VerticalAlignment="Center" Margin="0,0,12,0"/>
-                            <TextBlock Text="仪表盘" VerticalAlignment="Center"/>
-                        </StackPanel>
-                    </ListBoxItem>
-                    <ListBoxItem Tag="BusinessView">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="FileDocumentEdit" VerticalAlignment="Center" Margin="0,0,12,0"/>
-                            <TextBlock Text="业务录入" VerticalAlignment="Center"/>
-                        </StackPanel>
-                    </ListBoxItem>
-                    <ListBoxItem Tag="BaseInfoView">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Database" VerticalAlignment="Center" Margin="0,0,12,0"/>
-                            <TextBlock Text="基础信息" VerticalAlignment="Center"/>
-                        </StackPanel>
-                    </ListBoxItem>
-                    <ListBoxItem Tag="ReportView">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="ChartBar" VerticalAlignment="Center" Margin="0,0,12,0"/>
-                            <TextBlock Text="报表统计" VerticalAlignment="Center"/>
-                        </StackPanel>
-                    </ListBoxItem>
-                    <ListBoxItem Tag="SettingsView">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Cog" VerticalAlignment="Center" Margin="0,0,12,0"/>
-                            <TextBlock Text="系统设置" VerticalAlignment="Center"/>
-                        </StackPanel>
-                    </ListBoxItem>
-                </ListBox>
-
-                <TextBlock DockPanel.Dock="Bottom" Text="v1.0.0" FontSize="11"
-                           Foreground="#607D8B" HorizontalAlignment="Center" Margin="0,0,0,15"/>
-            </DockPanel>
+                <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button x:Name="ThemeToggleButton"
+                            Content="深色"
+                            Width="72"
+                            Click="ThemeToggleButton_Click"
+                            Style="{StaticResource TitleBarButtonStyle}" />
+                    <Button x:Name="MinButton" Content="—" Click="MinButton_Click" Style="{StaticResource TitleBarButtonStyle}" />
+                    <Button x:Name="MaxButton" Content="□" Click="MaxButton_Click" Style="{StaticResource TitleBarButtonStyle}" />
+                    <Button x:Name="CloseButton"
+                            Content="✕"
+                            Click="CloseButton_Click"
+                            Style="{StaticResource TitleBarButtonStyle}"
+                            Foreground="#FCA5A5" />
+                </StackPanel>
+            </Grid>
         </Border>
 
-        <Grid Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-            <Border Grid.Row="0" Background="White" BorderBrush="#E0E0E0" BorderThickness="0,0,0,1">
-                <DockPanel Margin="20,0">
-                    <TextBlock x:Name="PageTitle" Text="仪表盘" FontSize="18" FontWeight="Medium"
-                               VerticalAlignment="Center" DockPanel.Dock="Left"/>
-                </DockPanel>
+            <!-- Left Menu -->
+            <Border Grid.Column="0"
+                    Background="{DynamicResource WindowLeftPanelBrush}"
+                    BorderBrush="{DynamicResource WindowLeftPanelBorderBrush}"
+                    BorderThickness="0,0,1,0"
+                    Padding="12,12,12,10">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0"
+                               Text="菜单导航"
+                               FontSize="12"
+                               Foreground="{DynamicResource WindowMenuHeaderBrush}"
+                               Margin="4,0,0,10" />
+
+                    <ListBox x:Name="MenuList"
+                             Grid.Row="1"
+                             SelectionChanged="MenuList_SelectionChanged"
+                             Background="Transparent"
+                             BorderThickness="0">
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem">
+                                <Setter Property="Margin" Value="0,3" />
+                                <Setter Property="Padding" Value="14,10,12,10" />
+                                <Setter Property="Foreground" Value="{DynamicResource WindowMenuTextBrush}" />
+                                <Setter Property="FontSize" Value="14" />
+                                <Setter Property="Cursor" Value="Hand" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="ListBoxItem">
+                                            <Grid>
+                                                <Border x:Name="SelectionBar"
+                                                        Width="4"
+                                                        Margin="0,8,0,8"
+                                                        CornerRadius="0"
+                                                        HorizontalAlignment="Left"
+                                                        Background="{DynamicResource WindowAccentBrush}"
+                                                        Visibility="Collapsed" />
+                                                <Border x:Name="ItemPanel"
+                                                        Margin="10,0,0,0"
+                                                        Padding="{TemplateBinding Padding}"
+                                                        CornerRadius="6"
+                                                        Background="Transparent">
+                                                    <ContentPresenter VerticalAlignment="Center" />
+                                                </Border>
+                                            </Grid>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="ItemPanel" Property="Background" Value="{DynamicResource WindowMenuHoverBrush}" />
+                                                    <Setter Property="Foreground" Value="White" />
+                                                </Trigger>
+                                                <Trigger Property="IsSelected" Value="True">
+                                                    <Setter TargetName="ItemPanel" Property="Background" Value="{DynamicResource WindowMenuSelectedBrush}" />
+                                                    <Setter TargetName="SelectionBar" Property="Visibility" Value="Visible" />
+                                                    <Setter Property="Foreground" Value="White" />
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+
+                        <ListBoxItem Tag="DashboardView" IsSelected="True">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="ViewDashboardOutline" Width="20" Height="20" Margin="0,0,10,0" VerticalAlignment="Center" />
+                                <TextBlock Text="仪表盘" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </ListBoxItem>
+                        <ListBoxItem Tag="BusinessView">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="FileDocumentEditOutline" Width="20" Height="20" Margin="0,0,10,0" VerticalAlignment="Center" />
+                                <TextBlock Text="业务录入" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </ListBoxItem>
+                        <ListBoxItem Tag="BaseInfoView">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="DatabaseSettingsOutline" Width="20" Height="20" Margin="0,0,10,0" VerticalAlignment="Center" />
+                                <TextBlock Text="基础信息" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </ListBoxItem>
+                        <ListBoxItem Tag="ReportView">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="ChartLine" Width="20" Height="20" Margin="0,0,10,0" VerticalAlignment="Center" />
+                                <TextBlock Text="报表统计" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </ListBoxItem>
+                        <ListBoxItem Tag="PriceRuleView">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="TagMultipleOutline" Width="20" Height="20" Margin="0,0,10,0" VerticalAlignment="Center" />
+                                <TextBlock Text="单价规则" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </ListBoxItem>
+                        <ListBoxItem Tag="BatchPriceView">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="TableSync" Width="20" Height="20" Margin="0,0,10,0" VerticalAlignment="Center" />
+                                <TextBlock Text="批量调价" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </ListBoxItem>
+                        <ListBoxItem Tag="SettingsView">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="CogOutline" Width="20" Height="20" Margin="0,0,10,0" VerticalAlignment="Center" />
+                                <TextBlock Text="系统设置" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </ListBoxItem>
+                    </ListBox>
+
+                    <StackPanel Grid.Row="2" Margin="0,12,0,0">
+                        <Separator Margin="0,0,0,10" Background="{DynamicResource WindowSeparatorBrush}" />
+                        <TextBlock Text="v1.0.0" FontSize="12" Foreground="{DynamicResource WindowVersionTextBrush}" HorizontalAlignment="Center" />
+                        <TextBlock Text="CarsBill Desktop" FontSize="11" Foreground="{DynamicResource WindowVersionSubTextBrush}" HorizontalAlignment="Center" Margin="0,3,0,0" />
+                    </StackPanel>
+                </Grid>
             </Border>
 
-            <ContentControl Grid.Row="1" prism:RegionManager.RegionName="ContentRegion" Margin="15"/>
+            <!-- Content -->
+            <Grid Grid.Column="1" Background="{DynamicResource AppBackgroundBrush}">
+                <ContentControl prism:RegionManager.RegionName="ContentRegion" Margin="14" />
+            </Grid>
         </Grid>
     </Grid>
 </Window>
