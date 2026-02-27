@@ -1,6 +1,6 @@
 ﻿# CarsBill - 车队运费计费管理系统
 
-[English](README.md) | [简体中文](README.zh-CN.md)
+[![Language: English](https://img.shields.io/badge/Language-English-1f6feb)](README.md) [![语言: 简体中文](https://img.shields.io/badge/语言-简体中文-d23f31)](README.zh-CN.md)
 
 一个用于车队运输计费管理的 WPF 桌面应用。
 

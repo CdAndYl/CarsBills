@@ -1,6 +1,6 @@
 ﻿# CarsBill - Fleet Billing Management System
 
-[English](README.md) | [简体中文](README.zh-CN.md)
+[![Language: English](https://img.shields.io/badge/Language-English-1f6feb)](README.md) [![语言: 简体中文](https://img.shields.io/badge/语言-简体中文-d23f31)](README.zh-CN.md)
 
 A WPF desktop application for fleet transportation billing management.
 
