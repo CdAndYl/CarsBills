@@ -81,9 +81,10 @@ powershell -ExecutionPolicy Bypass -File "scripts/migration/sync_sqlserver_to_my
 ### 注意事项
 
 - `PriceRuleInfo` 作为可选表处理：不存在时会跳过，不影响其他表同步。
-- `BuinessRecod` 中文本型 ID 字段通过 `TRY_CONVERT(INT, ...)` 转为整数。
+- `BuinessRecod` 中文本型 ID 字段通过 `CASE WHEN ISNUMERIC(...) = 1 THEN CAST(...)` 转为整数。
+- 为兼容 SQL Server 2008/旧版本，脚本不依赖 `TRY_CONVERT`。
 - `business_record.car_id` 的回退逻辑：
-  - 先用 `TRY_CONVERT(INT, BuinessRecod.CarID)`
+  - 先用 `CASE WHEN ISNUMERIC(BuinessRecod.CarID)=1 THEN CAST(...)`
   - 失败则按 `LicensePlate` 匹配 `CarInfo.CarID`
   - 再失败则写入 `0`
 - 输出 SQL 采用 `UTF-8 with BOM`，避免中文乱码。
@@ -163,9 +164,9 @@ powershell -ExecutionPolicy Bypass -File "scripts/migration/sync_sqlserver_to_my
 ## Notes
 
 - `PriceRuleInfo` is treated as optional; sync continues if this table does not exist.
-- `BuinessRecod` ID-like text fields are converted with `TRY_CONVERT(INT, ...)`.
+- `BuinessRecod` ID-like text fields are converted with `CASE WHEN ISNUMERIC(...) = 1 THEN CAST(...)`.
 - For `business_record.car_id`, fallback logic is:
-  - `TRY_CONVERT(INT, BuinessRecod.CarID)`
+  - `CASE WHEN ISNUMERIC(BuinessRecod.CarID)=1 THEN CAST(...)`
   - else matched `CarInfo.CarID` by `LicensePlate`
   - else `0`
 - The script writes output SQL in UTF-8 with BOM to preserve Chinese text.

@@ -21,3 +21,6 @@ Thumbs.db
 
 # Build output
 build_output.txt
+
+# Migration generated SQL output
+scripts/migration/output/

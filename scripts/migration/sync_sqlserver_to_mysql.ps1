@@ -223,16 +223,16 @@ ORDER BY XmID;
         Query = @"
 SELECT
     b.businessID AS business_id,
-    COALESCE(TRY_CONVERT(INT, NULLIF(b.CarID, '')), c.CarID, 0) AS car_id,
+    COALESCE(CASE WHEN ISNUMERIC(NULLIF(b.CarID, '')) = 1 THEN CAST(NULLIF(b.CarID, '') AS INT) ELSE NULL END, c.CarID, 0) AS car_id,
     b.LicensePlate AS license_plate,
     CAST(b.DateAct AS DATE) AS business_date,
-    TRY_CONVERT(INT, NULLIF(b.addr_startID, '')) AS start_addr_id,
+    CASE WHEN ISNUMERIC(NULLIF(b.addr_startID, '')) = 1 THEN CAST(NULLIF(b.addr_startID, '') AS INT) ELSE NULL END AS start_addr_id,
     b.addr_start AS start_addr,
-    TRY_CONVERT(INT, NULLIF(b.addr_endID, '')) AS end_addr_id,
+    CASE WHEN ISNUMERIC(NULLIF(b.addr_endID, '')) = 1 THEN CAST(NULLIF(b.addr_endID, '') AS INT) ELSE NULL END AS end_addr_id,
     b.addr_end AS end_addr,
-    TRY_CONVERT(INT, NULLIF(b.wLid, '')) AS material_id,
+    CASE WHEN ISNUMERIC(NULLIF(b.wLid, '')) = 1 THEN CAST(NULLIF(b.wLid, '') AS INT) ELSE NULL END AS material_id,
     b.wLsName AS material_name,
-    TRY_CONVERT(INT, NULLIF(b.XmID, '')) AS project_id,
+    CASE WHEN ISNUMERIC(NULLIF(b.XmID, '')) = 1 THEN CAST(NULLIF(b.XmID, '') AS INT) ELSE NULL END AS project_id,
     b.XmName AS project_name,
     ISNULL(b.CarCount, 0) AS car_count,
     ISNULL(b.price, 0) AS price,
@@ -266,13 +266,13 @@ ORDER BY b.businessID;
         Query = @"
 SELECT
     RuleID AS rule_id,
-    TRY_CONVERT(INT, NULLIF(addr_startID, '')) AS start_addr_id,
+    CASE WHEN ISNUMERIC(NULLIF(addr_startID, '')) = 1 THEN CAST(NULLIF(addr_startID, '') AS INT) ELSE NULL END AS start_addr_id,
     addr_start AS start_addr,
-    TRY_CONVERT(INT, NULLIF(addr_endID, '')) AS end_addr_id,
+    CASE WHEN ISNUMERIC(NULLIF(addr_endID, '')) = 1 THEN CAST(NULLIF(addr_endID, '') AS INT) ELSE NULL END AS end_addr_id,
     addr_end AS end_addr,
-    TRY_CONVERT(INT, NULLIF(wLid, '')) AS material_id,
+    CASE WHEN ISNUMERIC(NULLIF(wLid, '')) = 1 THEN CAST(NULLIF(wLid, '') AS INT) ELSE NULL END AS material_id,
     wLsName AS material_name,
-    TRY_CONVERT(INT, NULLIF(xMid, '')) AS project_id,
+    CASE WHEN ISNUMERIC(NULLIF(xMid, '')) = 1 THEN CAST(NULLIF(xMid, '') AS INT) ELSE NULL END AS project_id,
     XmName AS project_name,
     sMemoKeyword AS memo_keyword,
     ISNULL(price, 0) AS price,
@@ -310,7 +310,7 @@ try {
         Write-Step "Querying source table for $name..."
         $rows = @()
         try {
-            $rows = Invoke-SourceQuery -Query $plan.Query -Server $SqlServer -Database $SqlDatabase -User $SqlUser -Password $SqlPassword
+            $rows = @(Invoke-SourceQuery -Query $plan.Query -Server $SqlServer -Database $SqlDatabase -User $SqlUser -Password $SqlPassword)
         }
         catch {
             if ($plan.Optional) {
@@ -320,19 +320,20 @@ try {
             throw
         }
 
-        Write-Step "Rows fetched from source for ${name}: $($rows.Count)"
-        if ($rows.Count -eq 0) {
+        $rowCount = @($rows).Count
+        Write-Step "Rows fetched from source for ${name}: $rowCount"
+        if ($rowCount -eq 0) {
             $writer.WriteLine("-- ${name}: 0 rows")
             $writer.WriteLine("")
             continue
         }
 
-        $writer.WriteLine("-- ${name}: $($rows.Count) rows")
+        $writer.WriteLine("-- ${name}: $rowCount rows")
         Write-UpsertBatches -Writer $writer `
             -Table $name `
             -Columns $plan.Columns `
             -UpdateColumns $plan.UpdateColumns `
-            -Rows $rows `
+            -Rows @($rows) `
             -ChunkSize $BatchSize
     }
 
